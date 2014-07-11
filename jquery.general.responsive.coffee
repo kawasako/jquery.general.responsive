@@ -11,22 +11,25 @@ $window = $ window
 
 ###
 Loading
+Pre rendering.
 ###
 
-window.is_ie = false;
-# javascript
-###
-@cc_on
-  @if (@_jscript_version == 10)
-    window.is_ie = 10;
-  @elif (@_jscript_version == 9)
-    window.is_ie = 9;
-  @elif (@_jscript_version == 5.8)
-    window.is_ie = 8;
-  @else
-    window.is_ie = 7;
-  @end
-@###
+userAgent = window.navigator.userAgent.toLowerCase()
+appVersion = window.navigator.appVersion.toLowerCase()
+window.is_ie = do ->
+  unless userAgent.indexOf("msie") is -1
+    unless appVersion.indexOf("msie 6.") is -1
+      return 6
+    else unless appVersion.indexOf("msie 7.") is -1
+      return 7
+    else unless appVersion.indexOf("msie 8.") is -1
+      return 8
+    else unless appVersion.indexOf("msie 9.") is -1
+      return 9
+    else
+      return 10
+  else
+    return false
 
 w = window.innerWidth || document.documentElement.clientWidth
 if w > 640
@@ -38,6 +41,7 @@ if is_ie < 9
 
 ###
 WindowSizeWath
+Biding resize event.
 ###
 
 class WindowSizeWatch
@@ -49,6 +53,7 @@ class WindowSizeWatch
 
   init: ->
     @globalEvent.check(@point)
+    return false if window.is_ie < 9
     @$window.resize (event)=>
       windowSize = event.target.innerWidth || document.body.clientWidth
       @globalEvent.check(windowSize)
@@ -63,6 +68,7 @@ class WindowSizeWatch
 
 ###
 NarrowWideEvent
+Push window event.
 ###
 
 class NarrowWideEvent
@@ -90,6 +96,7 @@ class NarrowWideEvent
 
 ###
 ResponsiveImage
+Change DOM contents.
 ###
 
 class ResponsiveImage

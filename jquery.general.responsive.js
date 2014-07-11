@@ -9,7 +9,7 @@
 
 
 (function() {
-  var $, $window, NarrowWideEvent, ResponsiveImage, WindowSizeWatch, w;
+  var $, $window, NarrowWideEvent, ResponsiveImage, WindowSizeWatch, appVersion, userAgent, w;
 
   $ = jQuery;
 
@@ -17,25 +17,31 @@
 
   /*
   Loading
+  Pre rendering.
   */
 
 
-  window.is_ie = false;
+  userAgent = window.navigator.userAgent.toLowerCase();
 
-  /*
-  @cc_on
-    @if (@_jscript_version == 10)
-      window.is_ie = 10;
-    @elif (@_jscript_version == 9)
-      window.is_ie = 9;
-    @elif (@_jscript_version == 5.8)
-      window.is_ie = 8;
-    @else
-      window.is_ie = 7;
-    @end
-  @
-  */
+  appVersion = window.navigator.appVersion.toLowerCase();
 
+  window.is_ie = (function() {
+    if (userAgent.indexOf("msie") !== -1) {
+      if (appVersion.indexOf("msie 6.") !== -1) {
+        return 6;
+      } else if (appVersion.indexOf("msie 7.") !== -1) {
+        return 7;
+      } else if (appVersion.indexOf("msie 8.") !== -1) {
+        return 8;
+      } else if (appVersion.indexOf("msie 9.") !== -1) {
+        return 9;
+      } else {
+        return 10;
+      }
+    } else {
+      return false;
+    }
+  })();
 
   w = window.innerWidth || document.documentElement.clientWidth;
 
@@ -51,6 +57,7 @@
 
   /*
   WindowSizeWath
+  Biding resize event.
   */
 
 
@@ -65,6 +72,9 @@
     WindowSizeWatch.prototype.init = function() {
       var _this = this;
       this.globalEvent.check(this.point);
+      if (window.is_ie < 9) {
+        return false;
+      }
       this.$window.resize(function(event) {
         var windowSize;
         windowSize = event.target.innerWidth || document.body.clientWidth;
@@ -88,6 +98,7 @@
 
   /*
   NarrowWideEvent
+  Push window event.
   */
 
 
@@ -127,6 +138,7 @@
 
   /*
   ResponsiveImage
+  Change DOM contents.
   */
 
 
