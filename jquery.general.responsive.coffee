@@ -1,6 +1,6 @@
 ### !
  * jQuery General responsive v0.1
- * http://terkel.jp/archives/2011/05/jquery-floating-widget-plugin/
+ * https://github.com/kawasako/jquery.general.responsive
  *
  * Copyright (c) 2014 Kohei Kawasaki
  * Licensed under the MIT license: http://www.opensource.org/licenses/MIT
@@ -9,23 +9,24 @@
 $ = jQuery
 $window = $ window
 
-### --------------------
-  Loading
--------------------- ###
+###
+Loading
+###
 
 window.is_ie = false;
 # javascript
-`/*@cc_on
-    @if (@_jscript_version == 10)
-      window.is_ie = 10;
-    @elif (@_jscript_version == 9)
-      window.is_ie = 9;
-    @elif (@_jscript_version == 5.8)
-      window.is_ie = 8;
-    @else
-      window.is_ie = 7;
-    @end
-  @*/`
+###
+@cc_on
+  @if (@_jscript_version == 10)
+    window.is_ie = 10;
+  @elif (@_jscript_version == 9)
+    window.is_ie = 9;
+  @elif (@_jscript_version == 5.8)
+    window.is_ie = 8;
+  @else
+    window.is_ie = 7;
+  @end
+@###
 
 w = window.innerWidth || document.documentElement.clientWidth
 if w > 640
@@ -35,9 +36,9 @@ else
 if is_ie < 9
   document.documentElement.className = 'device-desktop'
 
-### --------------------
-  WindowSizeWath
--------------------- ###
+###
+WindowSizeWath
+###
 
 class WindowSizeWatch
 
@@ -60,9 +61,9 @@ class WindowSizeWatch
         if !is_ie || is_ie > 8
           document.documentElement.className = 'device-mobile'
 
-### --------------------
-  NarrowWideEvent
--------------------- ###
+###
+NarrowWideEvent
+###
 
 class NarrowWideEvent
 
@@ -87,9 +88,9 @@ class NarrowWideEvent
         @$window.trigger("#{@prefix}-narrow")
         @state = 'narrow'
 
-### --------------------
-  ResponsiveImage
--------------------- ###
+###
+ResponsiveImage
+###
 
 class ResponsiveImage
   dataAttrName: "data-change-content"
@@ -123,9 +124,9 @@ class ResponsiveImage
         @state = 0
     $window.on events
 
-### --------------------
-  Initialize
--------------------- ###
+###
+Initialize
+###
 
 $ ->
   $("[data-change-content]").each ->
