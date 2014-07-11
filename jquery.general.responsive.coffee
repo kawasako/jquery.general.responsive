@@ -29,7 +29,7 @@ window.is_ie = do ->
     else
       return 10
   else
-    return false
+    return 999
 
 w = window.innerWidth || document.documentElement.clientWidth
 if w > 640

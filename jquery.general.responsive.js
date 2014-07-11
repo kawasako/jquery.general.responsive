@@ -39,7 +39,7 @@
         return 10;
       }
     } else {
-      return false;
+      return 999;
     }
   })();
 
