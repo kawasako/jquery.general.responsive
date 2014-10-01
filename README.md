@@ -1,5 +1,5 @@
-### How to use data-change-content
-
+How to use data-change-content
+-------------------------------
     <!-- image to image -->
     <img src="path/mobile-image.jpg" data-change-content="image:path/desktop-image.jpg" alt="">
 
