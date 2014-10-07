@@ -8,6 +8,7 @@
 
 $ = jQuery
 $window = $ window
+POINT = 768
 
 ###
 Loading
@@ -32,7 +33,7 @@ window.is_ie = do ->
     return 999
 
 w = window.innerWidth || document.documentElement.clientWidth
-if w > 640
+if w > POINT
   document.documentElement.className = 'device-desktop'
 else
   document.documentElement.className = 'device-mobile'
@@ -65,6 +66,9 @@ class WindowSizeWatch
       'global-narrow': ->
         if !is_ie || is_ie > 8
           document.documentElement.className = 'device-mobile'
+
+    windowSize = event.target.innerWidth || document.body.clientWidth
+    @globalEvent.check(windowSize)
 
 ###
 NarrowWideEvent
@@ -138,4 +142,4 @@ Initialize
 $ ->
   $("[data-change-content]").each ->
     new ResponsiveImage this, "global-wide", "global-narrow"
-  new WindowSizeWatch(640)
+  new WindowSizeWatch(POINT)

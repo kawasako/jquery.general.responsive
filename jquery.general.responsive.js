@@ -9,11 +9,13 @@
 
 
 (function() {
-  var $, $window, NarrowWideEvent, ResponsiveImage, WindowSizeWatch, appVersion, userAgent, w;
+  var $, $window, NarrowWideEvent, POINT, ResponsiveImage, WindowSizeWatch, appVersion, userAgent, w;
 
   $ = jQuery;
 
   $window = $(window);
+
+  POINT = 768;
 
   /*
   Loading
@@ -45,7 +47,7 @@
 
   w = window.innerWidth || document.documentElement.clientWidth;
 
-  if (w > 640) {
+  if (w > POINT) {
     document.documentElement.className = 'device-desktop';
   } else {
     document.documentElement.className = 'device-mobile';
@@ -70,7 +72,8 @@
     }
 
     WindowSizeWatch.prototype.init = function() {
-      var _this = this;
+      var windowSize,
+        _this = this;
       this.globalEvent.check(this.point);
       if (window.is_ie < 9) {
         return false;
@@ -80,7 +83,7 @@
         windowSize = event.target.innerWidth || document.body.clientWidth;
         return _this.globalEvent.check(windowSize);
       });
-      return $(window).on({
+      $(window).on({
         'global-wide': function() {
           return document.documentElement.className = 'device-desktop';
         },
@@ -90,6 +93,8 @@
           }
         }
       });
+      windowSize = window.innerWidth || document.body.clientWidth;
+      return this.globalEvent.check(windowSize);
     };
 
     return WindowSizeWatch;
@@ -202,7 +207,7 @@
     $("[data-change-content]").each(function() {
       return new ResponsiveImage(this, "global-wide", "global-narrow");
     });
-    return new WindowSizeWatch(640);
+    return new WindowSizeWatch(POINT);
   });
 
 }).call(this);
