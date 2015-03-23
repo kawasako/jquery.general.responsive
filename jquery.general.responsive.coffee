@@ -67,7 +67,7 @@ class WindowSizeWatch
         if !is_ie || is_ie > 8
           document.documentElement.className = 'device-mobile'
 
-    windowSize = event.target.innerWidth || document.body.clientWidth
+    windowSize = window.innerWidth || document.body.clientWidth
     @globalEvent.check(windowSize)
 
 ###

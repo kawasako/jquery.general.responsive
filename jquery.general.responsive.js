@@ -94,7 +94,7 @@
           }
         }
       });
-      windowSize = event.target.innerWidth || document.body.clientWidth;
+      windowSize = window.innerWidth || document.body.clientWidth;
       return this.globalEvent.check(windowSize);
     };
 
