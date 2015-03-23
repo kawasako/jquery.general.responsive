@@ -162,7 +162,7 @@
       this.$node = $(node);
       this.state = 0;
       this.changeContents = this.$node.attr(this.dataAttrName);
-      this.changeContents = this.changeContents.split(":");
+      this.changeContents = this.changeContents.split("::");
       if (!this.contentsTypes[this.changeContents[0]]) {
         return false;
       }

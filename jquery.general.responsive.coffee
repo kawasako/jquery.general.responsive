@@ -113,7 +113,7 @@ class ResponsiveImage
     @$node = $ node
     @state = 0
     @changeContents = @$node.attr @dataAttrName
-    @changeContents = @changeContents.split ":"
+    @changeContents = @changeContents.split "::"
     return false unless @contentsTypes[@changeContents[0]]
     @changeContents = @contentsTypes[@changeContents[0]].replace "{contents}", @changeContents[1]
     @alt = if @$node.prop "alt" then @$node.prop "alt" else @$node.text()
